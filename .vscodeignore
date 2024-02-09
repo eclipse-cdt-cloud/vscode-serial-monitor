@@ -1,0 +1,14 @@
+.DS_Store
+.github
+.vscode
+src
+*.vsix
+dist/**/*.js.map
+node_modules
+!node_modules/@serialport/bindings-cpp
+!node_modules/@serialport/bindings-interface
+!node_modules/@serialport/parser-delimiter
+!node_modules/@serialport/parser-readline
+!node_modules/node-gyp-build
+!node_modules/debug
+!node_modules/ms

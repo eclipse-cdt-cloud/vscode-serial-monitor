@@ -1,0 +1,101 @@
+{
+  "name": "serial-monitor",
+  "displayName": "Serial Monitor",
+  "description": "Views serial output of a device on desktop or web",
+  "version": "1.0.0",
+  "publisher": "eclipse-cdt",
+  "author": "Rob Moran <rob.moran@arm.com>",
+  "license": "EPL-2.0",
+  "main": "dist/desktop/extension.js",
+  "browser": "dist/browser/extension.js",
+  "repository": "https://github.com/eclipse-cdt-cloud/vscode-serial-monitor",
+  "qna": "https://github.com/eclipse-cdt-cloud/vscode-serial-monitor/issues",
+  "icon": "media/cdtcloud.png",
+  "engines": {
+    "vscode": "^1.63.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "serial",
+    "devices",
+    "embedded",
+    "microcontroller"
+  ],
+  "scripts": {
+    "prepare": "yarn build",
+    "clean": "git clean -f -x ./node_modules ./dist",
+    "build": "webpack --mode production && yarn lint",
+    "watch": "webpack -w",
+    "lint": "eslint . --ext .ts,.tsx",
+    "package": "vsce package --yarn",
+    "serve": "serve --cors -p 9876"
+  },
+  "dependencies": {
+    "serialport": "^12.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.10",
+    "@types/vscode": "^1.63.0",
+    "@types/w3c-web-serial": "^1.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "@vscode/vsce": "^2.22.0",
+    "eslint": "^8.54.0",
+    "serve": "^14.2.1",
+    "ts-loader": "^9.5.0",
+    "typescript": "^5.1.6",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "serial-monitor.openSerial",
+        "title": "Open Serial",
+        "icon": "$(console)"
+      }
+    ],
+    "configuration": {
+      "title": "Serial Monitor",
+      "properties": {
+        "serial-monitor.defaultBaud": {
+          "type": "string",
+          "enum": [
+            "600",
+            "1200",
+            "1800",
+            "2400",
+            "4800",
+            "9600",
+            "19200",
+            "38400",
+            "57600",
+            "115200"
+          ],
+          "default": "9600",
+          "description": "Specify the default baudrate when opening a serial port"
+        },
+        "serial-monitor.loggingVerbosity": {
+          "type": "string",
+          "enum": [
+            "off",
+            "error",
+            "warn",
+            "info",
+            "debug"
+          ],
+          "default": "warn",
+          "description": "Specify the logging verbosity of the extension"
+        }
+      }
+    }
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "extensionKind": [
+    "ui"
+  ]
+}
