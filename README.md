@@ -41,7 +41,7 @@ It's possible to drive the serial monitor from another extension programmaticall
 
 ```typescript
 import * as vscode from 'vscode';
-import { SerialMonitorExtension } from '@eclipse-cdt/vscode-serial-monitor';
+import { SerialMonitorExtension } from '@eclipse-cdt-cloud/vscode-serial-monitor';
 
 // Get extension
 const extension = vscode.extensions.getExtension('eclipse-cdt.serial-monitor');

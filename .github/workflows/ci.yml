@@ -24,7 +24,7 @@ jobs:
           node-version: 16.x
       - name: Setup npmrc
         run: |
-          echo "@eclipse-cdt:registry=https://npm.pkg.github.com/" >> .npmrc
+          echo "@eclipse-cdt-cloud:registry=https://npm.pkg.github.com/" >> .npmrc
           echo "//npm.pkg.github.com/:_authToken=${{secrets.GITHUB_TOKEN}}" >> .npmrc
       - name: Build
         env:
