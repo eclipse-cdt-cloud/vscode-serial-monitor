@@ -1,8 +1,8 @@
 {
   "name": "serial-monitor",
-  "displayName": "Serial Monitor",
-  "description": "Views serial output of a device on desktop or web",
-  "version": "1.0.1",
+  "displayName": "Web and Desktop Serial Monitor",
+  "description": "Views serial port output on desktop or web",
+  "version": "1.0.2",
   "publisher": "eclipse-cdt",
   "author": "Rob Moran <rob.moran@arm.com>",
   "license": "EPL-2.0",
@@ -19,6 +19,9 @@
   ],
   "keywords": [
     "serial",
+    "port",
+    "monitor",
+    "webserial",
     "devices",
     "embedded",
     "microcontroller"
