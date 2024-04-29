@@ -46,7 +46,7 @@
     "@typescript-eslint/parser": "^5.62.0",
     "@vscode/vsce": "^2.25.0",
     "eslint": "^8.57.0",
-    "serve": "^14.2.1",
+    "serve": "^14.2.3",
     "ts-loader": "^9.5.1",
     "typescript": "^5.4.5",
     "webpack": "^5.91.0",
