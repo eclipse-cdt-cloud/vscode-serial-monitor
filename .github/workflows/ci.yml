@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b
         with:
-          node-version: 18.x
+          node-version: 20.x
       - name: Setup npmrc
         run: |
           echo "@eclipse-cdt-cloud:registry=https://npm.pkg.github.com/" >> .npmrc
@@ -64,7 +64,7 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
       - uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b
         with:
-          node-version: 18.x
+          node-version: 20.x
       - name: Determine extension version
         id: get-extension-version
         run: |
@@ -85,7 +85,7 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
       - uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b
         with:
-          node-version: 18.x
+          node-version: 20.x
           registry-url: 'https://npm.pkg.github.com'
           always-auth: true
       - name: Set package version to match extension
@@ -111,7 +111,7 @@ jobs:
           path: artifacts
       - uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b
         with:
-          node-version: 18.x
+          node-version: 20.x
       - name: Publish
         run: |
           npx ovsx publish -i artifacts/*/*.vsix -p ${{secrets.OPEN_VSX_TOKEN}}
@@ -130,7 +130,7 @@ jobs:
           path: artifacts
       - uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b
         with:
-          node-version: 18.x
+          node-version: 20.x
       - name: Publish
         run: |
           npx vsce publish -i artifacts/*/*.vsix -p ${{secrets.VS_MARKETPLACE_TOKEN}}
