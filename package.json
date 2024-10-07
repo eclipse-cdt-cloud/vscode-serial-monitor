@@ -44,7 +44,7 @@
     "@types/w3c-web-serial": "^1.0.7",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
-    "@vscode/vsce": "^3.1.0",
+    "@vscode/vsce": "^3.1.1",
     "eslint": "^8.57.1",
     "serve": "^14.2.3",
     "ts-loader": "^9.5.1",
