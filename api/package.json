@@ -8,6 +8,6 @@
     },
     "repository": "https://github.com/eclipse-cdt-cloud/vscode-serial-monitor",
     "dependencies": {
-        "@types/w3c-web-serial": "^1.0.6"
+        "@types/w3c-web-serial": "^1.0.8"
     }
 }

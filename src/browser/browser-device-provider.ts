@@ -11,11 +11,20 @@
 import * as vscode from 'vscode';
 import { SerialDeviceProvider } from '../serial-manager';
 import { SerialDevice, SerialPortDevice } from '../serial-device';
-import { SerialFilter } from '../../api/serial-monitor';
+import { SerialFilter, SerialInfo } from '../../api/serial-monitor';
 
 const WEBSERIAL_COMMAND = 'workbench.experimental.requestSerialPort';
 
 export class BrowserDeviceProvider implements SerialDeviceProvider {
+
+    public async listPorts(): Promise<SerialInfo[]> {
+        const ports = await navigator.serial.getPorts();
+        const portInfos = await Promise.all(ports.map(port => port.getInfo()));
+        return portInfos.map(port => ({
+            productId: port.usbProductId?.toString(),
+            vendorId: port.usbVendorId?.toString()
+        }));
+    }
 
     public async getDevice(filter?: SerialFilter): Promise<SerialDevice | undefined> {
         let port: SerialPort | undefined;

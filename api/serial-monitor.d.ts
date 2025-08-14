@@ -15,6 +15,15 @@ export interface SerialFilter {
     path?: string;
 }
 
+// The web version can ony populate vid/pid
+export interface SerialInfo {
+    path?: string;
+    serialNumber?: string;
+    manufacturer?: string;
+    productId?: string;
+    vendorId?: string;
+}
+
 export interface SerialMonitorApiV1 {
     openSerial(portOrFilter?: SerialPort | SerialFilter, options?: SerialOptions, name?: string): Promise<string | undefined>;
     revealSerial(handle: string): Promise<boolean>;
@@ -22,6 +31,11 @@ export interface SerialMonitorApiV1 {
     resumeSerial(handle: string): Promise<boolean>;
 }
 
+export interface SerialMonitorApiV2 extends SerialMonitorApiV1 {
+    listPorts(): Promise<SerialInfo[]>;
+}
+
 export interface SerialMonitorExtension {
     getApi(version: 1): SerialMonitorApiV1;
+    getApi(version: 2): SerialMonitorApiV2;
 }

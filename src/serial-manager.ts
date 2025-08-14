@@ -12,9 +12,10 @@ import * as vscode from 'vscode';
 import * as manifest from './manifest';
 import { SerialTerminal } from './serial-terminal';
 import { SerialDevice, SerialPortDevice } from './serial-device';
-import { SerialFilter, SerialMonitorApiV1 } from '../api/serial-monitor';
+import { SerialFilter, SerialInfo, SerialMonitorApiV1 } from '../api/serial-monitor';
 
 export interface SerialDeviceProvider {
+    listPorts(): Promise<SerialInfo[]>;
     getDevice: (filter?: SerialFilter) => Promise<SerialDevice | undefined>;
 }
 
@@ -45,6 +46,10 @@ export class SerialManager implements SerialMonitorApiV1 {
         );
 
         this.updateStatus();
+    }
+
+    public async listPorts(): Promise<SerialInfo[]> {
+        return this.serialDeviceProvider.listPorts();
     }
 
     public async openSerial(portOrFilter?: SerialPort | SerialFilter, options?: SerialOptions, name?: string): Promise<string | undefined> {
