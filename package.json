@@ -2,7 +2,7 @@
   "name": "serial-monitor",
   "displayName": "Web and Desktop Serial Monitor",
   "description": "Views serial port output on desktop or web",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "publisher": "eclipse-cdt",
   "author": "Rob Moran <rob.moran@arm.com>",
   "license": "EPL-2.0",
