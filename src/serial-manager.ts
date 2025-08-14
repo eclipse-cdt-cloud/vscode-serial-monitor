@@ -18,7 +18,8 @@ export interface SerialDeviceProvider {
     getDevice: (filter?: SerialFilter) => Promise<SerialDevice | undefined>;
 }
 
-const BAUD_RATES = ['115200', '57600', '38400', '19200', '9600', '4800', '2400', '1800', '1200', '600'];
+const CUSTOM_BAUD = 'Custom...';
+const BAUD_RATES = ['115200', '57600', '38400', '19200', '9600', '4800', '2400', '1800', '1200', '600', CUSTOM_BAUD];
 
 const isSerialPort = (portOrFilter?: SerialPort | SerialFilter): portOrFilter is SerialPort => !!(portOrFilter as SerialPort)?.getInfo;
 
@@ -158,10 +159,23 @@ export class SerialManager implements SerialMonitorApiV1 {
     }
 
     protected async getBaudrate(currentBaudrate?: string): Promise<string | undefined> {
-        if (!currentBaudrate) {
+        if (!currentBaudrate || !BAUD_RATES.includes(currentBaudrate)) {
             currentBaudrate = vscode.workspace.getConfiguration(manifest.PACKAGE_NAME).get<string>(manifest.CONFIG_DEFAULT_BAUD) || manifest.DEFAULT_DEFAULT_BAUD;
         }
-        return vscode.window.showQuickPick(BAUD_RATES, { title: 'Select a baud rate', placeHolder: currentBaudrate });
+
+        let baud = await vscode.window.showQuickPick(BAUD_RATES, { title: 'Select a baud rate', placeHolder: currentBaudrate });
+        if (baud === CUSTOM_BAUD) {
+            baud = await vscode.window.showInputBox({
+                title: 'Custom Baud Rate',
+                prompt: 'Enter a custom baud rate',
+                validateInput: (value) => {
+                    const num = parseInt(value);
+                    return isNaN(num) || num <= 0 ? 'Please enter a valid positive number' : undefined;
+                }
+            });
+        }
+
+        return baud;
     }
 
     protected async getDevice(): Promise<SerialDevice | undefined> {
