@@ -13,7 +13,7 @@ import { SerialPort } from 'serialport';
 import { PortInfo } from '@serialport/bindings-cpp';
 import { DesktopSerialDevice, getName } from './desktop-serial-device';
 import { SerialDeviceProvider } from '../serial-manager';
-import { SerialFilter } from '../../api/serial-monitor';
+import { SerialFilter, SerialInfo } from '../../api/serial-monitor';
 import { SerialDevice } from '../serial-device';
 
 class PortItem implements vscode.QuickPickItem {
@@ -24,6 +24,17 @@ class PortItem implements vscode.QuickPickItem {
 }
 
 export class DesktopDeviceProvider implements SerialDeviceProvider {
+
+    public async listPorts(): Promise<SerialInfo[]> {
+        const ports = await SerialPort.list();
+        return ports.map(port => ({
+            path: port.path,
+            serialNumber: port.serialNumber,
+            manufacturer: port.manufacturer,
+            productId: port.productId,
+            vendorId: port.vendorId
+        }));
+    }
 
     public async getDevice(filter?: SerialFilter): Promise<SerialDevice | undefined> {
         let port = await this.getPortInfo(filter);

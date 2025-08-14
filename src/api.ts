@@ -8,7 +8,7 @@
  * SPDX-License-Identifier: EPL-2.0
  *********************************************************************/
 
-import { SerialMonitorApiV1, SerialMonitorExtension } from '../api/serial-monitor';
+import { SerialMonitorApiV1, SerialMonitorApiV2, SerialMonitorExtension } from '../api/serial-monitor';
 import { SerialManager } from './serial-manager';
 
 export class SerialMonitorImpl implements SerialMonitorExtension {
@@ -17,8 +17,9 @@ export class SerialMonitorImpl implements SerialMonitorExtension {
     ) {}
 
     public getApi(version: 1): SerialMonitorApiV1;
+    public getApi(version: 2): SerialMonitorApiV2;
     public getApi(version: number): unknown {
-        if (version === 1) {
+        if (version === 1 || version === 2) {
             return this.serialManager;
         }
 
