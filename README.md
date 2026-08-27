@@ -33,7 +33,10 @@ To modify the baud rate, follow these steps:
 
     ![Change active device Serial baud rate icon](images/change_baud_rate.png)
 
-## API USage
+If your device already echos back the serial input, you can disable this
+extension local echo setting `serial-monitor.localEcho` to `false`.
+
+## API Usage
 
 It's possible to drive the serial monitor from another extension programmatically. Please refer to [the API file](api/serial-monitor.d.ts) for interfaces and type definitions.
 

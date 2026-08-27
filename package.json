@@ -80,6 +80,11 @@
           "default": "9600",
           "description": "Specify the default baudrate when opening a serial port"
         },
+        "serial-monitor.localEcho": {
+          "type": "boolean",
+          "default": true,
+          "description": "Echo input locally in the serial terminal"
+        },
         "serial-monitor.loggingVerbosity": {
           "type": "string",
           "enum": [

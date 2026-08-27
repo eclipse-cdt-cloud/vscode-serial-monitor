@@ -10,7 +10,7 @@
 
 import * as vscode from 'vscode';
 import * as manifest from './manifest';
-import { SerialTerminal } from './serial-terminal';
+import { SerialTerminal, SerialTerminalOptions } from './serial-terminal';
 import { SerialDevice, SerialPortDevice } from './serial-device';
 import { SerialFilter, SerialInfo, SerialMonitorApiV1 } from '../api/serial-monitor';
 
@@ -104,7 +104,11 @@ export class SerialManager implements SerialMonitorApiV1 {
                 name = serialDevice.name;
             }
 
-            const pty = new SerialTerminal(serialDevice, options);
+            const terminalOptions: SerialTerminalOptions = {
+                localEcho: vscode.workspace.getConfiguration(manifest.PACKAGE_NAME).get<boolean>(manifest.CONFIG_LOCAL_ECHO)
+                    ?? manifest.DEFAULT_LOCAL_ECHO
+            };
+            const pty = new SerialTerminal(serialDevice, options, terminalOptions);
             pty.onDidClose(() => {
                 this.cleanup(serialDevice);
                 this.updateStatus();

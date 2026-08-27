@@ -1,5 +1,8 @@
 # Change Log
 
+## Unreleased
+- Added a setting to enable/disable local input echo
+
 ## 2.0.0
 - Added ability to list ports in the API and bumped the API to v2
 - Added ability to specifiy custom baud rate

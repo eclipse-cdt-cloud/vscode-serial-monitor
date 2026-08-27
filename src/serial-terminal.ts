@@ -11,6 +11,10 @@
 import * as vscode from 'vscode';
 import { SerialDevice } from './serial-device';
 
+export interface SerialTerminalOptions {
+    localEcho: boolean;
+}
+
 export class SerialTerminal implements vscode.Pseudoterminal {
 
     private writeEmitter = new vscode.EventEmitter<string>();
@@ -19,7 +23,11 @@ export class SerialTerminal implements vscode.Pseudoterminal {
     public onDidClose: vscode.Event<number> = this.closeEmitter.event;
     public closed = false;
 
-    public constructor(protected serialDevice: SerialDevice, protected options: SerialOptions) {
+    public constructor(
+        protected serialDevice: SerialDevice,
+        protected options: SerialOptions,
+        protected terminalOptions: SerialTerminalOptions
+    ) {
     }
 
     public async open(_initialDimensions: vscode.TerminalDimensions | undefined): Promise<void> {
@@ -40,7 +48,9 @@ export class SerialTerminal implements vscode.Pseudoterminal {
     }
 
     public handleInput(data: string): void {
-        this.writeOutput(data);
+        if (this.terminalOptions.localEcho) {
+            this.writeOutput(data);
+        }
         this.serialDevice.send(data);
     }
 
